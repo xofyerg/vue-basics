@@ -1,26 +1,62 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app">
+    <post-form @create="createPost" />
+    <post-list :posts="posts" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PostForm from "@/components/PostForm";
+import PostList from "@/components/PostList";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    PostForm,
+    PostList,
+  },
+  data() {
+    return {
+      posts: [
+        { id: 1, title: "Javascript", body: "Some info about JS" },
+        { id: 2, title: "Capybara", body: "I love capybara" },
+        { id: 3, title: "Vue", body: "What kind of animal is this Vue?" },
+      ],
+    };
+  },
+  methods: {
+    createPost(post) {
+      this.posts.push(post);
+    },
+    deletePost(postId) {
+      this.posts = this.posts.filter((item) => item !== postId);
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+input,
+textarea,
+button {
+  font-family: inherit;
+}
+
+body {
+  font-family: "Source Serif Pro", serif;
+}
+
+.app {
+  margin: 15px;
 }
 </style>
