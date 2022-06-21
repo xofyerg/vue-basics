@@ -1,6 +1,6 @@
 <template>
   <div class="post">
-    <div>
+    <div class="post__body">
       <div>
         Title: <strong>{{ post.title }}</strong>
       </div>
@@ -9,9 +9,9 @@
       </div>
     </div>
     <div class="post__buttons">
-      <button class="post__delete-btn" @click="$emit('remove', post)">
+      <my-button class="post__delete-btn" @click="$emit('remove', post)">
         Delete
-      </button>
+      </my-button>
     </div>
   </div>
 </template>
@@ -32,16 +32,17 @@ export default {
   padding: 15px;
   border: 2px solid #1698d9;
   border-radius: 5px;
-  font-size: 24px;
+  font-size: 18px;
+}
+
+.post__body {
+  margin-bottom: 10px;
 }
 
 .post__delete-btn {
+  font-size: 14px;
+  display: block;
   width: 80px;
-  height: 26px;
-  background: transparent;
-  border: 1px solid #1698d9;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 15px;
+  height: 35px;
 }
 </style>
