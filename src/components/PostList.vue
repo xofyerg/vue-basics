@@ -1,13 +1,15 @@
 <template>
-  <div class="list" v-if="posts.length > 0">
+  <div v-if="posts.length > 0">
     <h4 class="list__title">Posts:</h4>
 
-    <post-item
-      :post="post"
-      v-for="post in posts"
-      :key="post.id"
-      @remove="$emit('remove', post)"
-    />
+    <div class="list-item">
+      <post-item
+        :post="post"
+        v-for="post in posts"
+        :key="post.id"
+        @remove="$emit('remove', post)"
+      />
+    </div>
   </div>
   <h2 v-else>Post list is empty</h2>
 </template>
@@ -29,7 +31,7 @@ export default {
 </script>
 
 <style scoped>
-.list {
+.list-item {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -37,5 +39,7 @@ export default {
 
 .list__title {
   font-size: 30px;
+  margin-top: 45px;
+  margin-bottom: 5px;
 }
 </style>

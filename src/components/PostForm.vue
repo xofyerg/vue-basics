@@ -3,7 +3,10 @@
     <h4 class="form__title">Post creation</h4>
     <my-input v-model="post.title" type="text" placeholder="Title" />
     <my-input v-model="post.body" type="text" placeholder="Info" />
-    <my-button @click="createPost">Create post</my-button>
+    <div class="form__buttons">
+      <my-button @click="createPost">Create post</my-button>
+      <my-button @click="hideDialog">Back</my-button>
+    </div>
   </form>
 </template>
 
@@ -26,6 +29,9 @@ export default {
         body: "",
       };
     },
+    hideDialog() {
+      this.$emit("update:show", false);
+    },
   },
 };
 </script>
@@ -35,10 +41,14 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-bottom: 45px;
 }
 
 .form__title {
   font-size: 38px;
+}
+
+.form__buttons {
+  display: flex;
+  gap: 8px;
 }
 </style>

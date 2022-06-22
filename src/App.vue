@@ -1,6 +1,12 @@
 <template>
   <div class="app">
-    <post-form @create="createPost" />
+    <h4 class="app__title">Post creation</h4>
+    <my-button @click="showDialog">Create posts:</my-button>
+
+    <my-dialog v-model:show="dialogVisible" @hide="hideDialog">
+      <post-form @create="createPost" v-model:show="dialogVisible" />
+    </my-dialog>
+
     <post-list :posts="posts" @remove="removePost" />
   </div>
 </template>
@@ -21,14 +27,22 @@ export default {
         { id: 2, title: "Capybara", body: "I love capybara" },
         { id: 3, title: "Vue", body: "What kind of animal is this Vue?" },
       ],
+      dialogVisible: false,
     };
   },
   methods: {
     createPost(post) {
       this.posts.push(post);
+      this.dialogVisible = false;
     },
     removePost(post) {
       this.posts = this.posts.filter((item) => item.id !== post.id);
+    },
+    showDialog() {
+      this.dialogVisible = true;
+    },
+    hideDialog() {
+      this.dialogVisible = false;
     },
   },
 };
@@ -58,5 +72,9 @@ body {
 
 .app {
   margin: 15px;
+}
+
+.app__title {
+  font-size: 38px;
 }
 </style>
