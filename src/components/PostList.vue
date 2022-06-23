@@ -11,7 +11,7 @@
       />
     </div>
   </div>
-  <h2 v-else>Post list is empty</h2>
+  <h3 class="list__empty" v-else>Post list is empty</h3>
 </template>
 
 <script>
@@ -41,5 +41,9 @@ export default {
   font-size: 30px;
   margin-top: 45px;
   margin-bottom: 5px;
+}
+
+.list__empty {
+  margin-top: 25px;
 }
 </style>
