@@ -1,7 +1,10 @@
 <template>
   <div class="app">
     <h4 class="app__title">Post creation</h4>
-    <my-button @click="showDialog">Create posts</my-button>
+    <div class="app__btns">
+      <my-button @click="showDialog">Create posts</my-button>
+      <my-select v-model="selectedSort" :options="sortOptions" />
+    </div>
 
     <my-dialog v-model:show="dialogVisible" @hide="hideDialog">
       <post-form @create="createPost" v-model:show="dialogVisible" />
@@ -27,6 +30,12 @@ export default {
       posts: [],
       dialogVisible: false,
       isPostsLoading: false,
+      selectedSort: "",
+      sortOptions: [
+        { value: "title", name: "by title" },
+        { value: "body", name: "by body" },
+        { value: "id", name: "by id" },
+      ],
     };
   },
   methods: {
@@ -86,5 +95,11 @@ body {
 
 .app__title {
   font-size: 38px;
+}
+
+.app__btns {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
 }
 </style>
