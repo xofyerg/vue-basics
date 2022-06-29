@@ -5,12 +5,17 @@
       <my-button @click="showDialog">Create posts</my-button>
       <my-select v-model="selectedSort" :options="sortOptions" />
     </div>
+    <my-input v-model="searchQuery" placeholder="Search..." />
 
     <my-dialog v-model:show="dialogVisible" @hide="hideDialog">
       <post-form @create="createPost" v-model:show="dialogVisible" />
     </my-dialog>
 
-    <post-list :posts="posts" @remove="removePost" v-if="!isPostsLoading" />
+    <post-list
+      :posts="sortedAndSearchedPosts"
+      @remove="removePost"
+      v-if="!isPostsLoading"
+    />
     <div v-else>Loading...</div>
   </div>
 </template>
@@ -30,6 +35,7 @@ export default {
       posts: [],
       dialogVisible: false,
       isPostsLoading: false,
+      searchQuery: "",
       selectedSort: "",
       sortOptions: [
         { value: "title", name: "by title" },
@@ -63,6 +69,18 @@ export default {
   },
   mounted() {
     this.fetchPosts();
+  },
+  computed: {
+    sortedPosts() {
+      return [...this.posts].sort((post1, post2) =>
+        post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
+      );
+    },
+    sortedAndSearchedPosts() {
+      return this.sortedPosts.filter((post) =>
+        post.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
   },
 };
 </script>
