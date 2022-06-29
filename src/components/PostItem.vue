@@ -2,6 +2,9 @@
   <div class="post">
     <div class="post__body">
       <div>
+        id: <strong>{{ post.id }}</strong>
+      </div>
+      <div>
         Title: <strong>{{ post.title }}</strong>
       </div>
       <div>
