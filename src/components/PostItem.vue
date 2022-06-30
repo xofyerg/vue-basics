@@ -2,7 +2,7 @@
   <div class="post">
     <div class="post__body">
       <div>
-        id: <strong>{{ post.id }}</strong>
+        ID: <strong>{{ post.id }}</strong>
       </div>
       <div>
         Title: <strong>{{ post.title }}</strong>
@@ -11,8 +11,11 @@
         Info: <strong>{{ post.body }}</strong>
       </div>
     </div>
-    <div class="post__buttons">
-      <my-button class="post__delete-btn" @click="$emit('remove', post)">
+    <div class="post__btns">
+      <my-button class="post__btn" @click="$router.push(`/posts/${post.id}`)"
+        >Open</my-button
+      >
+      <my-button class="post__btn" @click="$emit('remove', post)">
         Delete
       </my-button>
     </div>
@@ -20,7 +23,12 @@
 </template>
 
 <script>
+import MyButton from "@/components/UI/MyButton";
+
 export default {
+  components: {
+    MyButton,
+  },
   props: {
     post: {
       type: Object,
@@ -42,7 +50,12 @@ export default {
   margin-bottom: 10px;
 }
 
-.post__delete-btn {
+.post__btns {
+  display: flex;
+  gap: 5px;
+}
+
+.post__btn {
   font-size: 14px;
   display: block;
   width: 80px;

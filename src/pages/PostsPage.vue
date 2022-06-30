@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <h4 class="app__title">Post creation</h4>
+  <div class="posts">
+    <div class="posts__top">
+      <h4 class="posts__title">Post creation</h4>
+      <my-input v-model="searchQuery" placeholder="Search..." />
 
-    <my-input v-model="searchQuery" placeholder="Search..." />
-    <div class="app__btns">
-      <my-button @click="showDialog">Create posts</my-button>
-      <my-select v-model="selectedSort" :options="sortOptions" />
+      <div class="posts__btns">
+        <my-button @click="showDialog">Create posts</my-button>
+        <my-select v-model="selectedSort" :options="sortOptions" />
+      </div>
     </div>
 
     <my-dialog v-model:show="dialogVisible" @hide="hideDialog">
@@ -20,19 +22,6 @@
     <div v-else>Loading...</div>
 
     <div class="observer" ref="observer"></div>
-    <!--    <div class="paginator">-->
-    <!--      <div-->
-    <!--        class="paginator__page"-->
-    <!--        :class="{-->
-    <!--          'current-page': page === pageNumber,-->
-    <!--        }"-->
-    <!--        v-for="pageNumber in totalPages"-->
-    <!--        :key="pageNumber"-->
-    <!--        @click="changePage(pageNumber)"-->
-    <!--      >-->
-    <!--        {{ pageNumber }}-->
-    <!--      </div>-->
-    <!--    </div>-->
   </div>
 </template>
 
@@ -77,9 +66,6 @@ export default {
     hideDialog() {
       this.dialogVisible = false;
     },
-    // changePage(pageNumber) {
-    //   this.page = pageNumber;
-    // },
     async fetchPosts() {
       this.isPostsLoading = true;
       const response = await axios
@@ -142,38 +128,22 @@ export default {
       );
     },
   },
-  watch: {
-    // page() {
-    //   this.fetchPosts();
-    // },
-  },
 };
 </script>
 
 <style scoped>
-.app__title {
+.posts__top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.posts__title {
   font-size: 38px;
 }
 
-.app__btns {
+.posts__btns {
   display: flex;
-  justify-content: space-between;
-  width: 30%;
+  gap: 10px;
 }
-
-/*.paginator {*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  margin-top: 15px;*/
-/*}*/
-
-/*.paginator__page {*/
-/*  border: 1px solid #000;*/
-/*  padding: 15px;*/
-/*  cursor: pointer;*/
-/*}*/
-
-/*.current-page {*/
-/*  border: 2px solid #cccccc;*/
-/*}*/
 </style>

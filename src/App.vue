@@ -28,6 +28,7 @@ export default {
 }
 
 input,
+select,
 textarea,
 button {
   font-family: inherit;

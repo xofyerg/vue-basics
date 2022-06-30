@@ -3,15 +3,22 @@
     <div class="navbar__title">Vue BASICS</div>
 
     <div class="navbar__btns">
-      <my-button @click="$router.push('/')">To Home</my-button>
-      <my-button @click="$router.push('/posts')">To Posts</my-button>
+      <my-button class="navbar__btn" @click="$router.push('/')"
+        >To Home</my-button
+      >
+      <my-button class="navbar__btn" @click="$router.push('/posts')"
+        >To Posts</my-button
+      >
     </div>
   </div>
 </template>
 
 <script>
+import MyButton from "@/components/UI/MyButton";
 export default {
-  components: {},
+  components: {
+    MyButton,
+  },
 };
 </script>
 
@@ -29,5 +36,12 @@ export default {
 .navbar__title {
   color: #fff;
   font-size: 28px;
+}
+
+.navbar__btn {
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  color: #fff;
+  margin-left: 5px;
 }
 </style>
