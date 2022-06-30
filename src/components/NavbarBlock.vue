@@ -9,6 +9,9 @@
       <my-button class="navbar__btn" @click="$router.push('/posts')"
         >To Posts</my-button
       >
+      <my-button class="navbar__btn" @click="$router.push('/store')"
+        >Store</my-button
+      >
     </div>
   </div>
 </template>
